@@ -1,0 +1,32 @@
+import re
+def is_valid_input(expression: str) -> bool:
+    numbers = re.findall(r'\d+',expression)
+    for number in numbers:
+        if not (1 <= int(number) <=10):
+            return False
+    return True
+def main(input: str):
+    operators=['+','-','*','/']
+    expression_without_negative = re.sub(r'(?<!\d)-','',input)
+    operator_count = sum(expression_without_negative.count(op) for op in operators)
+    if operator_count != 1:
+        print("throws Exception //т.к. формат математической операции не удовлетворяет заданию - два операнда и один оператор (+, -, /, *)")
+        return
+
+    if not is_valid_input(input):
+        print("Ошибка, вне диапазона 1-10")
+        return 
+
+    try:
+        if "." or ',' in input:
+            raise ValueError("Только целые числа!")
+        input = input.replace("/","//")
+        result = eval(input)
+        print(f"Ваш ответ: {result}")
+    except Exception as e:
+        print(f"Ошибка:строка не является математической операцией!\n{e}")
+
+if __name__ == "__main__":
+    print("******* Калькулятор *******")
+    user_input = input("Введите выражение: ")
+    main(user_input)
