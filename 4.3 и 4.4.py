@@ -9,3 +9,9 @@ for item in spisok:
         letters.append(item)
 print("Цифры: ", numbers)
 print("Буквы: ", letters)
+
+letters.pop()
+print(f'Удален последний элемент: {letters}')
+letters.reverse()
+print(f'Перевернули: {letters}')
+
